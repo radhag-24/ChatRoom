@@ -1,5 +1,5 @@
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
-from fastapi.responses import HTMLResponse
+# from fastapi.responses import HTMLResponse
 import asyncio
 import json
 import logging
@@ -17,7 +17,6 @@ MESSAGE_TTL = 30
 
 
 async def make_username_unique(topic: str, desired: str) -> str:
-    """Return a username unique inside the topic by appending #n if needed."""
     users = topics.get(topic, {})
     if desired not in users:
         return desired
@@ -28,7 +27,6 @@ async def make_username_unique(topic: str, desired: str) -> str:
 
 
 async def expire_message(topic: str, msg_id: int, ttl: int = MESSAGE_TTL):
-    """Sleep for ttl seconds and then remove message with msg_id from messages[topic]."""
     await asyncio.sleep(ttl)
     try:
         topic_msgs = messages.get(topic)
@@ -41,7 +39,6 @@ async def expire_message(topic: str, msg_id: int, ttl: int = MESSAGE_TTL):
 
 
 async def broadcast_to_topic(topic: str, payload: dict, exclude_username: str = None):
-    """Send payload (dict) to all users in topic except exclude_username."""
     users = topics.get(topic, {})
     dead_users = []
     for username, ws in list(users.items()):
@@ -57,7 +54,6 @@ async def broadcast_to_topic(topic: str, payload: dict, exclude_username: str = 
 
 
 async def remove_user_from_topic(topic: str, username: str):
-    """Remove a user from a topic and delete topic if empty."""
     try:
         users = topics.get(topic)
         if not users:

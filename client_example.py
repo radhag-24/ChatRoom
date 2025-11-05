@@ -7,7 +7,6 @@ SERVER_URL = "ws://localhost:8000/ws"
 
 
 async def listen_messages(websocket):
-    """Continuously receive messages from server."""
     try:
         async for message in websocket:
             try:
@@ -21,7 +20,6 @@ async def listen_messages(websocket):
 
 
 async def user_input(websocket):
-    """Non-blocking input loop."""
     loop = asyncio.get_event_loop()
     while True:
         msg = await loop.run_in_executor(None, sys.stdin.readline)
