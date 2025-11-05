@@ -7,7 +7,7 @@ Users can:
 - **Join or create** a chat topic (room)
 - **Send & receive** real-time messages instantly
 - Use `/list` to view all active topics with user counts
-- Messages **auto-expire** after a configurable duration (e.g., 30 seconds / 3 minutes)
+- Messages **auto-expire** after a configurable duration (e.g., 30 seconds)
 
 ---
 
